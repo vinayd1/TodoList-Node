@@ -1,44 +1,46 @@
-const express = require('express');
-
+const express = require('express');                 //Requiring the Modules
+const bodyParser = require('body-parser');
 const data = require('./Database');
 const app = express();
 
+app.use(bodyParser.urlencoded({extended: true}));   //Middle-ware b/w server-side and client-side
+app.use(bodyParser.json());
 
+app.use('/', express.static('public'));             //Connection server-side and client-side
 
-app.get('/', function (req, res) {
-    res.send("Welcome to Back-end of todo-list");
-
+app.post('/add', (req, res) => {                    //Add data to database
+    let item = req.body.data;
+    data.add(item, function (r) {
+        res.send(r);
+    });
 });
 
-app.get('/add', (req, res) => {
-    let item = req.query.item;
-    data.add(item);
-    res.send("Added");
-});
-
-app.get('/delete', (req, res) => {
-    let id = req.query.id;
+app.post('/delete', (req) => {                 //Delete data from database
+    let id = req.body.id;
     data.del(id);
-    res.send("Deleted");
 });
 
-app.get('/check', (req, res) => {
-    let id = req.query.id;
+app.post('/clear', () => {                  //Clear the entire database
+    data.clear();
+})
+
+app.post('/check', (req) => {                   //Check/Uncheck the todo Item
+    let id = req.body.id;
     data.done(id);
-    res.send("Check/Uncheck");
 });
 
-app.get('/update', (req, res) => {
-    let id = req.query.id;
-    let item = req.query.item;
+app.post('/update', (req, res) => {                  //Update data in todo list
+    let id = req.body.id;
+    let item = req.body.item;
     data.update(id, item);
-    res.send("Updated");
 });
 
-app.get('/display', (req, res) => {
-    res.send(data.display());
+app.get('/display', (req, res) => {                 //Print The entire data of database
+    data.display(function (result) {
+        res.send(result);
+    });
 });
 
-app.listen('8000', () => {
+app.listen('8000', () => {                          //Listening the port
     console.log("Server running on port 8000");
 });

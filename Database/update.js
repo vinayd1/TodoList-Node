@@ -1,11 +1,9 @@
 const mysql = require('mysql');
 const db = require('./db');
 function update(id, item) {
-    let sql = `UPDATE todo set item=${item} WHERE id=${id}`;
-    db.query(sql, (err, result) => {
+    let sql = `UPDATE todo SET item='${item}', done=0 WHERE id=${id};`;
+    db.query(sql, (err) => {
         if (err) throw err;
-        console.log("Item Entered");
-        console.log(result);
     });
 }
 
