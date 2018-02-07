@@ -44,6 +44,6 @@ app.get('/display', (req, res) => {                 //Print The entire data of d
     });
 });
 
-app.listen('8000', () => {                          //Listening the port
+app.listen(process.env.PORT, () => {                          //Listening the port
     console.log("Server running on port 8000");
 });
