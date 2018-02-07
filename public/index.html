@@ -2,17 +2,31 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Todo</title>
+    <title>Todo List</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
-<input type="text" id="inp" placeholder="Enter Item">
-<button id="btn">Add</button>
-<button id="clr">Clear</button>
-<ol id="result"></ol>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<div class="container">
+    <h2 class="center-align" style="color: #16A09A  ">TODO LIST</h2>
+    <br>
+    <div class="row">
+        <div class="input-field col s8 offset-s2">
+            <input type="text" id="inp" class="validate">
+            <label for="inp">Enter Item</label>
+        </div>
+    </div>
+    <div class="center-align">
+        <button class="waves-effect waves-light btn" id="btn"><i class="material-icons left">get_app</i>Add</button>
+        <button class="waves-effect waves-light btn" id="clr"><i class="material-icons left">cached</i>Clear</button>
+    </div>
+    <br>
+    <div id="result" class="row collection"></div>
+</div>
+</body>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
 <script src="functions.js"></script>
 <script src="script.js"></script>
-<script src="functions.js"></script>
 </body>
 </html>

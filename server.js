@@ -24,15 +24,18 @@ app.post('/clear', () => {                  //Clear the entire database
     data.clear();
 })
 
-app.post('/check', (req) => {                   //Check/Uncheck the todo Item
+app.post('/check', (req, res) => {                   //Check/Uncheck the todo Item
     let id = req.body.id;
-    data.done(id);
+    data.done(id, function (cb) {
+        res.send(cb);
+    });
 });
 
 app.post('/update', (req, res) => {                  //Update data in todo list
     let id = req.body.id;
     let item = req.body.item;
     data.update(id, item);
+    res.send("Updated");
 });
 
 app.get('/display', (req, res) => {                 //Print The entire data of database

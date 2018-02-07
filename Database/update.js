@@ -1,4 +1,3 @@
-const mysql = require('mysql');
 const db = require('./db');
 function update(id, item) {
     let sql = `UPDATE todo SET item='${item}', done=0 WHERE id=${id};`;

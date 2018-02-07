@@ -1,24 +1,28 @@
-
 let fun = (function () {
-    let fun = {};
+    let func = {};
     function done(id) {
         $.post({
             'url': '/check',
-            'data': {'id': id}
+            'data': {'id': id},
+            'success': function (res) {
+                if(res.done === 1)
+                    $(`#t${id}`).css({'text-decoration': 'line-through'});
+                else
+                    $(`#t${id}`).css({'text-decoration': 'none'});
+            }
         });
-        $(`#t${id}`).css({'text-decoration': 'line-through'});
     }
 
     function del(id) {
         $.post({
             'url': '/delete',
-            'data': {'id': id}
+            'data': {'id': id},
         });
         $(`#${id}`).remove();
     }
 
     function update(id) {
-        $(`#t${id}`).html(`<input onkeydown="fun.up(this, ${id})">`);
+        $(`#t${id}`).html(`<input class="center-align" id="np" placeholder="Enter data" onkeydown="fun.up(this, ${id})">`);
     }
 
     function up(e, id) {
@@ -34,10 +38,10 @@ let fun = (function () {
         }
     }
 
-    fun.done = done;
-    fun.up = up;
-    fun.update = update;
-    fun.del = del;
+    func.done = done;
+    func.up = up;
+    func.update = update;
+    func.del = del;
 
-    return fun;
+    return func;
 })();

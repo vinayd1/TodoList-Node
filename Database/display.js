@@ -1,4 +1,3 @@
-const mysql = require('mysql');
 const db = require('./db');
 function display(cb) {
     let sql = `SELECT * FROM todo`;
